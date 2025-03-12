@@ -33,13 +33,13 @@ body {
 }
 
 .auth{
-    display: flex;
+    /* display: flex; */
     position: fixed;
     z-index: 12;
-    top: 50%;
-    left: 50%;
-    margin-top: -100px;
-    margin-left: -150px;
+    height: 250px;
+    width: 300px;
+    top:calc(50% - 250px/2);
+    left:calc(50% - 300px/2);
 }
 
 .form__auth {
