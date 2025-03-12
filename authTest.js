@@ -5,6 +5,5 @@ const body = document.querySelector('.body');
 
 // функция не работает. идея: отключение класса окна, что поверх body
 submitBtn.addEventListener('click', () =>{
-    auth
-    bodyAfter.querySelector('body::after').classList.toggle('on');
+    
 })

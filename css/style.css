@@ -17,6 +17,42 @@ body {
     background: rgb(161,255,0);
     background: radial-gradient(circle, rgba(161,255,0,1) 0%, rgba(254,255,254,1) 40%, rgba(16,213,255,1) 72%, rgba(83,123,236,1) 100%);
     font-family: "Pixelify Sans", serif;
+    position:relative;
+}
+
+.auth-bg {
+    content: "";
+    display: block;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 10;
+}
+
+.auth{
+    display: flex;
+    position: fixed;
+    z-index: 12;
+    top: 50%;
+    left: 50%;
+    margin-top: -100px;
+    margin-left: -150px;
+}
+
+.form__auth {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background-color: rgb(161,255,0);
+    padding: 25%;
+}
+
+.form__auth input{
+    padding: 5%;
+    border-radius: 5px;
 }
 
 /* доп. классы */

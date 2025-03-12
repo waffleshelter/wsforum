@@ -1,3 +1,9 @@
+const applicantForm = document.getElementById('user-form')
+const bodyAfter = document.querySelector(".auth-bg");
+const authBtn = document.querySelector(".submit-btn");
+const formAuth = document.querySelector(".form__auth")
+const auth = document.querySelector('.auth');
+
 function serializeForm(formNode) {
     const { elements } = formNode
     const data = Array.from(elements)
@@ -9,7 +15,7 @@ function serializeForm(formNode) {
       })
   
     document.getElementById('main-pub-block').innerHTML += `<div class'main-pub-block-item shadow'> <h1>${data[0]['value']}</h1> <p>${data[1]['value']}</p> </div>`;
-  }
+}
   
   
 
@@ -19,13 +25,17 @@ function handleFormSubmit(event) {
     
     console.log('Отправка!')
     serializeForm(applicantForm)
-  }
-  
-  const applicantForm = document.getElementById('user-form')
-  applicantForm.addEventListener('submit', handleFormSubmit)
+}
   
   
+applicantForm.addEventListener('submit', handleFormSubmit)
 
+formAuth.addEventListener('submit', handleFormSubmit);
+authBtn.addEventListener('click', () => {
+  
+  bodyAfter.style.display = "none";
+  auth.style.display = "none";
+})
 // Добавление к HTML обработанного сообщения от пользователя: НЕ РАБОТАЕТ
 // if(document.getElementById('submit-btn').onclick) {
 //     document.getElementById('main-pub-block').innerHTML += "<div class'main-pub-block-item shadow'> <h1>Никнейм</h1> <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempore dolorum vero ex quaerat suscipit aliquid illo magnam hic explicabo ad, at deleniti architecto quas ducimus consequuntur. Voluptatum obcaecati repudiandae reprehenderit.</p> </div>";
