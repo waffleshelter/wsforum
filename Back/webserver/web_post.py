@@ -1,17 +1,19 @@
-from fastapi import Request, APIRouter
-from pydantic import BaseModel, SecretStr
+import os, sys
+sys.path.append(os.getcwd())
+
+from Back.database.model import UserPy, UsersSQL
+from fastapi import APIRouter, Response, HTTPException
+
 
 # Роутер нашего FastAPI приложения
 router = APIRouter()
 
 
-# Модели Pydantic (Валидация данных)
-class User(BaseModel):
-    username: str 
-    password: SecretStr
-
-
 # Прием POST запроса
-@router.post("/test", tags="1", summary="Обработка запросов")
-async def Receive_data(user: User):
-    return user
+@router.post("/add", tags = "1", summary = "Обработка запросов", status_code = 201)
+async def Receive_data(user: UserPy):
+    try:
+        await UsersSQL.Create_User(user)
+    except HTTPException as e:
+        return e.status_code
+
