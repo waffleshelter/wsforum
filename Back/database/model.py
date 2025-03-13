@@ -1,14 +1,13 @@
-import os, sys
+import os, sys, hashlib, hmac
 sys.path.append(os.getcwd())
 
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 from sqlalchemy.ext.asyncio import AsyncAttrs, async_sessionmaker, create_async_engine
 from sqlalchemy import String, Integer
 from fastapi import HTTPException
-from pydantic import BaseModel, SecretStr
+from pydantic import BaseModel
 from dotenv import load_dotenv
 from os import getenv
-import hashlib, hmac
 
 
 # Запуск асинхронного движка для взаимодествия с БД
@@ -20,7 +19,7 @@ async_session = async_sessionmaker(engine, expire_on_commit = True)
 # Модели Pydantic (Валидация данных)
 class UserPy(BaseModel):
     username: str 
-    password: str # SecretStr для сокрытия пароля при логировании и прочем
+    password: str 
 
 
 # Модели SqlAlchemy
@@ -47,7 +46,7 @@ class UsersSQL(Base):
 
             except Exception as e:
                 await session.rollback()
-                raise HTTPException(status_code = 400, detail = e)
+                raise HTTPException(status_code = 400, detail = "Error ehile creating User: ")
             
             finally:
                 await session.close()
