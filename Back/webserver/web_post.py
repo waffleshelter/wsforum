@@ -13,11 +13,21 @@ logger = logging.getLogger(__name__)
 
 
 # Прием POST запроса
-@router.post("/add", tags = "1", summary = "Обработка запросов", status_code = 201)
+@router.post("/add", tags = ["POST"], summary = "Обработка запросов", status_code = 201)
 async def Receive_data(user: UserPy):
     try:
         await UsersSQL.Create_User(user)
         logger.info("User succefuly created")
+    except HTTPException as e:
+        logger.error(f"{e.status_code}\n{e.detail}", exc_info=True)
+        return e.status_code
+    
+@router.post("/get", tags = ["POST"], summary = "Обработка запросов", status_code = 200)
+async def Receive_data(user: UserPy):
+    try:
+        user_id = await UsersSQL.Get_User_ID(user)
+        logger.info("User succefuly find")
+        return {"user_id": user_id}
     except HTTPException as e:
         logger.error(f"{e.status_code}\n{e.detail}", exc_info=True)
         return e.status_code

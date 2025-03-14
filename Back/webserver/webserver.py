@@ -5,6 +5,7 @@ from fastapi import FastAPI
 from contextlib import asynccontextmanager
 from dotenv import load_dotenv
 from web_post import router as POST
+from web_get import router as GET
 from Back.database.model import async_main
 import uvicorn
 
@@ -22,6 +23,7 @@ async def lifespan(app: FastAPI):
 # Инстанция нашего приложения FastAPI
 app = FastAPI(lifespan = lifespan)
 app.include_router(POST)
+app.include_router(GET)
 
 
 if __name__ == "__main__":

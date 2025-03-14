@@ -3,7 +3,7 @@ sys.path.append(os.getcwd())
 
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 from sqlalchemy.ext.asyncio import AsyncAttrs, async_sessionmaker, create_async_engine
-from sqlalchemy import String, Integer
+from sqlalchemy import String, Integer, Sequence, select, and_, exc
 from fastapi import HTTPException
 from pydantic import BaseModel
 from dotenv import load_dotenv
@@ -35,6 +35,7 @@ class UsersSQL(Base):
 
     # Добавление в БД
     async def Create_User(user: UserPy) -> None | Exception:
+        """Создание нового пользователя"""
         async with async_session() as session:
             try:
                 hash_byte = hmac.new(getenv("HASH_KEY").encode(), user.password.encode(), hashlib.sha256)
@@ -46,14 +47,37 @@ class UsersSQL(Base):
 
             except Exception as e:
                 await session.rollback()
-                raise HTTPException(status_code = 400, detail = "Error ehile creating User: ")
+                raise HTTPException(status_code = 400, detail = "Error while creating User: ")
+            
+            finally:
+                await session.close()
+
+
+    async def Get_User_ID(user: UserPy) -> Sequence[int] | Exception:
+        """Получаем пользователя из БД"""
+        async with async_session() as session:
+            try:
+                query = select(UsersSQL.user_ID).filter(and_(UsersSQL.username == user.username))
+                result = await session.execute(query)
+
+            except exc.SQLAlchemyError:
+                await session.rollback()
+                raise HTTPException(status_code = 400, detail = "SQLAlchemy Exception: ")
+            
+            except Exception:
+                await session.rollback()
+                raise HTTPException(status_code = 400, detail = "Error while getting User_ID: ")
+            
+            else:
+                workers = result.scalars().all()
+                return workers
             
             finally:
                 await session.close()
 
 
 # Запуск асинхронного движка
-# Обновление данных в соответсвии с metadata
 async def async_main():
+    """Обновление данных в соответствии с metadata"""
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
