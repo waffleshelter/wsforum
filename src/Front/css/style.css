@@ -1,0 +1,220 @@
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Press+Start+2P&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    border:  none;
+    font-family: "Pixelify Sans", serif;
+}
+
+*::placeholder {
+    padding-left: 10px;
+    padding-top: 5px;
+}
+
+a:active, /* активная/посещенная ссылка */
+a:hover,  /* при наведении */
+a {
+  text-decoration: none;
+  color: black;
+}
+
+:root {
+    --main-color: rgb(242, 255, 130);
+}
+
+body {
+    background: radial-gradient(circle, rgba(161,255,0,1) 0%, rgba(254,255,254,1) 40%, rgba(16,213,255,1) 72%, rgba(83,123,236,1) 100%);
+    position:relative;
+}
+
+nav {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.nav {
+    padding: 2%!important;
+}
+
+#menu-btn {
+    display: none;
+}
+
+.nav__item {
+    padding: 0.7rem 1rem;
+    align-self: center;
+    border-radius: 5px;
+    /* background-color: rgba(242, 255, 0, 0.1); */
+    -webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+    box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+}
+
+.nav__item:hover {
+    -webkit-box-shadow: 0px 5px 10px 2px rgba(0, 0, 0, 0.2) inset;
+    -moz-box-shadow: 0px 5px 10px 2px rgba(0, 0, 0, 0.2) inset;
+    box-shadow: 0px 5px 10px 2px rgba(0, 0, 0, 0.2) inset;
+    transition: all 0.5s;
+}
+
+.auth-bg {
+    content: "";
+    display: block;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.8);
+    z-index: 10;
+}
+
+.auth{
+    position: fixed;
+    z-index: 12;
+    height: 250px;
+    width: 300px;
+    top:calc(50% - 250px/2);
+    left:calc(50% - 300px/2);
+}
+
+.form__auth {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background-color: var(--main-color);
+    padding: 25%;
+    -webkit-box-shadow: 0px 5px 32px 16px rgba(0, 0, 0, 0.3) inset;
+    -moz-box-shadow: 0px 5px 32px 16px rgba(0, 0, 0, 0.3) inset;
+    box-shadow: 0px 5px 32px 16px rgba(0, 0, 0, 0.3) inset;
+}
+
+.form__auth input{
+    padding: 5%;
+    border-radius: 5px;
+}
+
+/* доп. классы */
+.shadow {
+    -webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+    box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+}
+
+.bord-rad {
+    border-radius: 5px;
+}
+
+/* контейнеры */
+.container {
+    border-radius: 5px;
+    padding: 2%;
+    width: clamp(20rem, -1.2766rem + 90.7801vw, 60rem);
+    background-color: var(--main-color);
+    margin: 1% auto;
+}
+
+.sub-container {
+    margin: 0 auto;
+    max-width: clamp(20rem, -1.2766rem + 90.7801vw, 60rem);
+}
+
+/* остальное */
+.anon-form form {
+    display: flex;
+    flex-direction: column;
+    margin: 2vh 0 0 0;
+    gap: 2vh;
+}
+
+.header-h1 {
+    font-size: 2rem;
+}
+
+#nickname {
+    max-width: 70%;
+    height: 3vh;
+}
+
+#submit-btn {
+    height: 3vh;
+    max-width: clamp(6rem, 2.2766rem + 15.8865vw, 13rem);
+}
+
+.main-pub-block {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5%;
+    gap: 4vh;
+    word-wrap: break-word;
+}
+
+.main-pub-block-item {
+    /* background-color: darkgrey; */
+    border-radius: 5px;
+    padding: 10px;
+    max-width: 80%;
+}
+
+.main-pub-block-item h1 {
+    background-color: white;
+    max-width: fit-content;
+    padding: 3px 5px;
+    margin-bottom: 5px;
+    font-weight: 600;
+    font-size: 25px;
+}
+
+.main-pub-block-item p {
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.close {
+    display: none
+}
+
+@media (min-width: 350px) and (max-width: 655px) {
+    .nav {
+        display: none;
+        position: fixed;
+        left: 0;
+        width: 20rem;
+        -webkit-box-shadow: 6px 6px 10px 2px rgba(0, 0, 0, 0.2);
+        -moz-box-shadow: 6px 6px 10px 2px rgba(0, 0, 0, 0.2);
+        box-shadow: 6px 6px 10px 2px rgba(0, 0, 0, 0.2);
+        height: 100vh;
+        z-index: 100;
+    }
+
+    .nav nav {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .nav__item {
+        width: 70%;
+        text-align: center;
+    }
+
+    .top__logo__close__item {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    #menu-btn {
+        display: inline-block;
+        background: transparent;
+        cursor: pointer;
+        color: var(--color-dark)
+    }
+
+    .close {
+        display: inline-block;
+        cursor: pointer;
+    }
+}
