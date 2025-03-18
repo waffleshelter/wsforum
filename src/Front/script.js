@@ -1,12 +1,48 @@
-const applicantForm = document.getElementById('user-form')
-const bodyAfter = document.querySelector(".auth-bg");
-const authBtn = document.querySelector(".submit-btn");
-const formAuth = document.querySelector(".form__auth")
-const auth = document.querySelector('.auth');
-const sideMenu = document.querySelector('.nav');
 const menuBtn = document.querySelector('#menu-btn');
 const closeBtn = document.querySelector('.close');
+const sideMenu = document.querySelector('.nav');
+const authBlock = document.querySelector('.auth__block');
 
+// Прослушиваем форму авторизации на отправку данных и предотвращаем перезагрузку страницы
+document.querySelector('.form__auth').addEventListener('submit', e => {
+  e.preventDefault();
+
+  // Записываем данные из формы авторизации
+  const data = {
+    password: document.getElementById('auth__password').value,
+    username: document.getElementById('auth__username').value
+    
+  }
+  
+  sendForm(data);
+
+
+  // Тут пока костыльное закрытие формы
+  authBlock.style.display = "none";
+  document.querySelector('.auth-bg').style.display = "none";  
+})
+
+async function sendForm(data) {
+  // тут пока хз че указывать как аргумент для fetch, должен быть адрес куда отправляю данные из формы
+  const res = await fetch('/add', {
+    method: 'POST',
+    headers: {'Content-type': 'application/json'},
+    body: JSON.stringify(data)
+  })
+
+  const result = await res.json();
+
+  console.log(result);
+  // if(res.status === 201) {
+  //   alert(`Thanks! ${result.message}`)
+
+  // }
+}
+
+
+
+
+// Функции для работы меню в адаптивном режиме со смартфона
 menuBtn.addEventListener('click', () => {
     menuBtn.style.display = "none"
     sideMenu.style.display = "block";
@@ -16,39 +52,3 @@ closeBtn.addEventListener('click', () => {
     sideMenu.style.display = "none";
     menuBtn.style.display = "inline-block";
 })
-
-
-function serializeForm(formNode) {
-    const { elements } = formNode
-    const data = Array.from(elements)
-      .filter((item) => !!item.name)
-      .map((element) => {
-        const { name, value } = element
-  
-        return { name, value }
-      })
-  
-    document.getElementById('main-pub-block').innerHTML += `<div class'main-pub-block-item shadow'> <h1>${data[0]['value']}</h1> <p>${data[1]['value']}</p> </div>`;
-}
-  
-function handleFormSubmit(event) {
-    // Просим форму не отправлять данные самостоятельно
-    event.preventDefault()
-    
-    console.log('Отправка!')
-    serializeForm(applicantForm)
-}
-  
-  
-applicantForm.addEventListener('submit', handleFormSubmit)
-
-formAuth.addEventListener('submit', handleFormSubmit);
-authBtn.addEventListener('click', () => {
-  
-  bodyAfter.style.display = "none";
-  auth.style.display = "none";
-})
-// Добавление к HTML обработанного сообщения от пользователя: НЕ РАБОТАЕТ
-// if(document.getElementById('submit-btn').onclick) {
-//     document.getElementById('main-pub-block').innerHTML += "<div class'main-pub-block-item shadow'> <h1>Никнейм</h1> <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempore dolorum vero ex quaerat suscipit aliquid illo magnam hic explicabo ad, at deleniti architecto quas ducimus consequuntur. Voluptatum obcaecati repudiandae reprehenderit.</p> </div>";
-// }
