@@ -1,14 +1,16 @@
 # **Для корректного запуска требуется:**
-1) Создание virtual environment в папке Back
+1) Создание зависимостей
 ```
 Python -m venv venv
+venv/scripts/activate
+pip install -r req.txt
 ```
-2) .env файл в папке Back с содержимым вида:
+2) Создание .env файл в папке src с содержимым вида:
 ```
 DBROOT = 'sqlite+aiosqlite:///Back/database/db.sqlite3'
 HASH_KEY = 'Here is hash key'
 ```
-3) Установка всех библиотек из req.txt
+3) Запуск приложения
 ```
-pip install -r req.txt
+Python -m src.main
 ```
