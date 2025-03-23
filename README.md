@@ -7,7 +7,7 @@ pip install -r req.txt
 ```
 2) Создание .env файл в папке src с содержимым вида:
 ```
-DBROOT = 'sqlite+aiosqlite:///Back/database/db.sqlite3'
+DBROOT = 'sqlite+aiosqlite:///src/db.sqlite3'
 HASH_KEY = 'Here is hash key'
 ```
 3) Запуск приложения
