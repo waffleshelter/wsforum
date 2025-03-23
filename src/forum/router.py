@@ -29,3 +29,21 @@ async def Receive_data():
     except Exception as e:
         print(e)
         return Response(content = "Unknown error", status_code = 500)
+
+
+@router.get("/imgs/close.svg", tags = ["Сайт"], summary = "Обработка запросов", status_code = 200)
+async def Receive_data():
+    try:
+        return FileResponse("src/Front/imgs/close.svg")
+    except Exception as e:
+        print(e)
+        return Response(content = "Unknown error", status_code = 500)
+    
+    
+@router.get("/favicon.ico", tags = ["Сайт"], summary = "Обработка запросов", status_code = 200)
+async def Receive_data():
+    try:
+        return FileResponse("src/Front/imgs/close.svg")
+    except Exception as e:
+        print(e)
+        return Response(content = "Unknown error", status_code = 500)
