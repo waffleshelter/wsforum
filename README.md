@@ -9,9 +9,9 @@ pip install -r req.txt
 ```
 **Linux**
 ```
-Source backend
+cd backend
 Python -m venv venv
-venv/scripts/activate
+source venv/bin/activate
 pip install -r req.txt
 ```
 ## 2) Создание .env файл в папке src с содержимым вида:
