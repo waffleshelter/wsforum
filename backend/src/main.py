@@ -1,11 +1,12 @@
 import uvicorn
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 from dotenv import load_dotenv
 
-from .posts.router import router as POST
-from .forum.router import router as GET
+from .POST.router import router as POST
+from .GET.router import router as GET
 from .database.core import async_main
 
 
@@ -19,6 +20,10 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(lifespan = lifespan)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"]
+)
 app.include_router(POST)
 app.include_router(GET)
 
