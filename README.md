@@ -18,6 +18,7 @@ pip install -r req.txt
 ```
 DBROOT = 'sqlite+aiosqlite:///src/db.sqlite3'
 HASH_KEY = 'Here is hash key'
+FPATH = "(ДИСК)\wsforum\frontend"
 ```
 ## 3) Запуск приложения
 ```
