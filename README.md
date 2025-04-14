@@ -1,26 +1,33 @@
-# **Для корректного запуска требуется:**
-## 1) Создание зависимостей
+# FAQ
+Тут будут ответики на вопросы которые могут возникнуть.
 
-**Windows**
+Возможно я буду сюда добавлять что-то еще, но я неуверен.
+
+## Содержание
+- [Как запускать сервер](#как-запускать-сервер)
+
+## Как запускать сервер
+### 1. Подключаемся по ssh к нашему серверу
 ```
-Python -m venv venv
-venv/scripts/activate
-pip install -r req.txt
+ssh root@0.0.0.0
 ```
-**Linux**
+  1. Вместо 0.0.0.0 айпи сервера соответствено
+  2. Если затребует пароль то возьми его с хостинга, при вводе он не будет отображаться это норма
+### 2. Переходим в папку с проектом
 ```
-cd backend
-Python -m venv venv
-source venv/bin/activate
-pip install -r req.txt
+cd wsforum
 ```
-## 2) Создание .env файл в папке src с содержимым вида:
+>Если выдает ошибку что папки нет или она отсутствует:
 ```
-DBROOT = 'sqlite+aiosqlite:///src/db.sqlite3'
-HASH_KEY = 'Here is hash key'
-FPATH = "(ДИСК)\wsforum\frontend"
+git clone https://github.com/waffleshelter/wsforum.git
+cd wsforum
 ```
-## 3) Запуск приложения
+### 3. Подтягиваем последние изменения из git
 ```
-Python -m src.main
+git pull
 ```
+### 4. Запускаем Docker контейнеры
+```
+docker compose up --build
+```
+>Если выдает ошибку при запуске вероятно отсутсвует .env в папке backend
