@@ -1,8 +1,12 @@
 FROM python:3.11.9-slim
 
-COPY requirements.txt requirements.txt
-RUN pip install -r requirements.txt
+WORKDIR /backend
+
+COPY req.txt .
+RUN pip install --no-cache-dir -r req.txt
 
 COPY . .
 
-CMD [ "python", "main.py" ]
+ENV PYTHONPATH=/backend/src
+
+CMD ["python", "-m", "src.main"]

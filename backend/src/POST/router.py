@@ -9,6 +9,12 @@ from ..database.service import DataBaseService
 # Роутер нашего FastAPI приложения
 router = APIRouter()
 
+@router.get("/get", tags = ["POST"], summary = "Обработка запросов")
+async def receive_data():
+    try:
+        return "hello"
+    except HTTPException as e:
+        return Response(content = "Unknown error", status_code = e.status_code)
 
 @router.post("/add", tags = ["POST"], summary = "Обработка запросов", status_code = 201)
 async def receive_data(user: UserPy):

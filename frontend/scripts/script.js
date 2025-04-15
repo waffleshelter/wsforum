@@ -24,7 +24,7 @@ document.querySelector('.form__auth').addEventListener('submit', e => {
 
 async function sendForm(data) {
   // тут пока хз че указывать как аргумент для fetch, должен быть адрес куда отправляю данные из формы
-  const res = await fetch('/add', {
+  const res = await fetch('api/add', {
     method: 'POST',
     headers: {'Content-type': 'application/json'},
     body: JSON.stringify(data)
